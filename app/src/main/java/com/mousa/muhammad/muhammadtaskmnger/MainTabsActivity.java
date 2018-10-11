@@ -1,5 +1,6 @@
 package com.mousa.muhammad.muhammadtaskmnger;
 
+import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -18,6 +19,10 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import android.widget.TextView;
+
+import com.mousa.muhammad.muhammadtaskmnger.taskfragment.MyTasksFragment;
+import com.mousa.muhammad.muhammadtaskmnger.taskfragment.ProfileFragment;
+import com.mousa.muhammad.muhammadtaskmnger.taskfragment.TaskHistoryFragment;
 
 public class MainTabsActivity extends AppCompatActivity {
 
@@ -130,6 +135,9 @@ public class MainTabsActivity extends AppCompatActivity {
      * one of the sections/tabs/pages.
      */
     public class SectionsPagerAdapter extends FragmentPagerAdapter {
+        MyTasksFragment myTasksFragment;
+        TaskHistoryFragment taskHistoryFragment;
+        ProfileFragment profileFragment;
 
         public SectionsPagerAdapter(FragmentManager fm) {
             super(fm);
@@ -137,6 +145,33 @@ public class MainTabsActivity extends AppCompatActivity {
 
         @Override
         public Fragment getItem(int position) {
+
+            if(position==0)
+            {
+                if(myTasksFragment==null)
+                {
+                    myTasksFragment= new MyTasksFragment();
+                }
+                return myTasksFragment;
+            }
+            if(position==1)
+            {
+                if(taskHistoryFragment==null)
+                {
+                   taskHistoryFragment= new TaskHistoryFragment();
+                }
+                return taskHistoryFragment;
+            }
+            if(position==2)
+            {
+                if(profileFragment==null)
+                {
+                    profileFragment= new ProfileFragment();
+                }
+                return profileFragment;
+            }
+
+
             // getItem is called to instantiate the fragment for the given page.
             // Return a PlaceholderFragment (defined as a static inner class below).
             return PlaceholderFragment.newInstance(position + 1);
@@ -146,6 +181,19 @@ public class MainTabsActivity extends AppCompatActivity {
         public int getCount() {
             // Show 3 total pages.
             return 3;
+        }
+
+
+        @Nullable
+        @Override
+        public CharSequence getPageTitle(int position) {
+            if(position==0)
+                return "Tasks";
+            if(position==1)
+                return "History";
+            if(position==2)
+                return "Profile";
+            return "noname";
         }
     }
 }
