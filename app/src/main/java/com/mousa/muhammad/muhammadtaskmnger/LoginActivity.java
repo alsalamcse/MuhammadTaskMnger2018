@@ -27,7 +27,7 @@ public class LoginActivity extends AppCompatActivity
             @Override
             public void onClick(View view) {
                 Intent i1= new Intent(LoginActivity.this, MainTabsActivity .class);
-                startActivityForResult(i1);
+                startActivity(i1);
             }
         });
 
@@ -35,7 +35,7 @@ public class LoginActivity extends AppCompatActivity
             @Override
             public void onClick(View view) {
                 Intent i2= new Intent(LoginActivity.this, SignupActivity.class);
-                startActivityForResult(i2);
+                startActivity(i2);
                 
 
             }
