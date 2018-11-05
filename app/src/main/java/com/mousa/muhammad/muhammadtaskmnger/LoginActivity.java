@@ -28,6 +28,7 @@ public class LoginActivity extends AppCompatActivity
             public void onClick(View view) {
                 Intent i1= new Intent(LoginActivity.this, MainTabsActivity .class);
                 startActivity(i1);
+                // if email &
             }
         });
 
