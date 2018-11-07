@@ -31,7 +31,7 @@ public class AddTaskActivity extends AppCompatActivity {
         save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+            dataHandler();
             }
         });
 
@@ -62,6 +62,10 @@ public class AddTaskActivity extends AppCompatActivity {
         {
             duedate.setError("Have to be at least 8 letters");
             isok=false;
+        }
+        if (isok)
+        {
+            
         }
 
 

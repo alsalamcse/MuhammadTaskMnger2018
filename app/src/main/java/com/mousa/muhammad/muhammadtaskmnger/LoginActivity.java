@@ -32,8 +32,9 @@ public class LoginActivity extends AppCompatActivity {
         btnSignin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i1 = new Intent(LoginActivity.this, MainTabsActivity.class);
-                startActivity(i1);
+               // Intent i1 = new Intent(LoginActivity.this, MainTabsActivity.class);
+                dataHandler();
+               // startActivity(i1);
                 // if email &
             }
         });
@@ -42,6 +43,7 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent i2 = new Intent(LoginActivity.this, SignupActivity.class);
+
                 startActivity(i2);
 
 
@@ -59,8 +61,8 @@ public class LoginActivity extends AppCompatActivity {
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()) {
                     Toast.makeText(LoginActivity.this, "signIn Successful.", Toast.LENGTH_SHORT).show();
-                    // Intent intent=new Intent(LogInActivity.this,MainFCMActivity.class);
-                    //   startActivity(intent);
+                     Intent intent=new Intent(LoginActivity.this,MainTabsActivity.class);
+                      startActivity(intent);
                     //  finish();
                 } else {
                     Toast.makeText(LoginActivity.this, "signIn failed." + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
@@ -87,6 +89,8 @@ public class LoginActivity extends AppCompatActivity {
         }
         if (isok) {
             signIn(email1, password1);
+            // Intent intent=new Intent(LogInActivity.this,MainFCMActivity.class);
+            //   startActivity(intent);
         }
     }
 }
