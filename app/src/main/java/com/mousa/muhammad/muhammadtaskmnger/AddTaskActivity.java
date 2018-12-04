@@ -1,11 +1,22 @@
 package com.mousa.muhammad.muhammadtaskmnger;
 
+import android.content.Intent;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.SeekBar;
+import android.widget.Toast;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+import java.util.Date;
 
 public class AddTaskActivity extends AppCompatActivity {
     private EditText title, text, duedate, createdate;
@@ -65,8 +76,33 @@ public class AddTaskActivity extends AppCompatActivity {
         }
         if (isok)
         {
-            
-        }
+            MyTask task = new MyTask();
+        task.setCreatedAT(new Date());
+//            task.setDueDate(new Date(date));
+        task.setText(text1);
+        task.setTitle(title1);
+        task.setImportant(important1);
+        task.setNecessary(necessary1);
+
+        FirebaseAuth auth = FirebaseAuth.getInstance();
+        task.setOwner(auth.getCurrentUser().getEmail());
+
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference();
+        String key = reference.child("MyTasks").push().getKey();
+        task.setKey(key);
+        reference.child("MyTasks").child(key).setValue(task).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                if (task.isSuccessful()){
+                    Toast.makeText(getApplicationContext() , "it worked " , Toast.LENGTH_SHORT);
+                    Intent i = new Intent(getApplicationContext() , MainTabsActivity.class);
+                    startActivity(i);
+                }else {
+                    Toast.makeText(getApplicationContext() , "it didnt work " , Toast.LENGTH_SHORT);
+                }
+            }
+        });
+
 
 
 
