@@ -42,80 +42,66 @@ public class AddTaskActivity extends AppCompatActivity {
         save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-            dataHandler();
+                dataHandler();
             }
         });
 
     }
-    private void dataHandler()
-    {
 
-        boolean isok= true;
-        String  title1=  title.getText().toString();
-        String text1=text.getText().toString();
-        String duedate1=duedate.getText().toString();
-        String createdate1=createdate.getText().toString();
+    private void dataHandler() {
 
-        int important1=important.getProgress();
-        int necessary1=necessary.getProgress();
+        boolean isok = true;
+        String title1 = title.getText().toString();
+        String text1 = text.getText().toString();
+        String duedate1 = duedate.getText().toString();
+        String createdate1 = createdate.getText().toString();
 
-        if(title1.length()<8)
-        {
+        int important1 = important.getProgress();
+        int necessary1 = necessary.getProgress();
+
+        if (title1.length() < 8) {
             title.setError("Have to be at least 8 letters");
-            isok=false;
+            isok = false;
         }
-        if(text1.length()<8)
-        {
+        if (text1.length() < 8) {
             text.setError("Have to be at least 8 letters");
-            isok=false;
+            isok = false;
         }
-        if(duedate1.length()<8)
-        {
+        if (duedate1.length() < 8) {
             duedate.setError("Have to be at least 8 letters");
-            isok=false;
+            isok = false;
         }
-        if (isok)
-        {
+        if (isok) {
             MyTask task = new MyTask();
-        task.setCreatedAT(new Date());
+            task.setCreatedAT(new Date());
 //            task.setDueDate(new Date(date));
-        task.setText(text1);
-        task.setTitle(title1);
-        task.setImportant(important1);
-        task.setNecessary(necessary1);
+            task.setText(text1);
+            task.setTitle(title1);
+            task.setImportant(important1);
+            task.setNecessary(necessary1);
 
-        FirebaseAuth auth = FirebaseAuth.getInstance();
-        task.setOwner(auth.getCurrentUser().getEmail());
+            FirebaseAuth auth = FirebaseAuth.getInstance();
+            task.setOwner(auth.getCurrentUser().getEmail());
 
-        DatabaseReference reference = FirebaseDatabase.getInstance().getReference();
-        String key = reference.child("MyTasks").push().getKey();
-        task.setKey(key);
-        reference.child("MyTasks").child(key).setValue(task).addOnCompleteListener(new OnCompleteListener<Void>() {
-            @Override
-            public void onComplete(@NonNull Task<Void> task) {
-                if (task.isSuccessful()){
-                    Toast.makeText(getApplicationContext() , "it worked " , Toast.LENGTH_SHORT);
-                    Intent i = new Intent(getApplicationContext() , MainTabsActivity.class);
-                    startActivity(i);
-                }else {
-                    Toast.makeText(getApplicationContext() , "it didnt work " , Toast.LENGTH_SHORT);
+            DatabaseReference reference = FirebaseDatabase.getInstance().getReference();
+            String key = reference.child("MyTasks").push().getKey();
+            task.setKey(key);
+            reference.child("MyTasks").child(key).setValue(task).addOnCompleteListener(new OnCompleteListener<Void>() {
+                @Override
+                public void onComplete(@NonNull Task<Void> task) {
+                    if (task.isSuccessful()) {
+                        Toast.makeText(getApplicationContext(), "it worked ", Toast.LENGTH_SHORT);
+                        Intent i = new Intent(getApplicationContext(), MainTabsActivity.class);
+                        startActivity(i);
+                    } else {
+                        Toast.makeText(getApplicationContext(), "it didnt work ", Toast.LENGTH_SHORT);
+                    }
                 }
-            }
-        });
+            });
 
 
-
+        }
 
 
     }
-
-
-
 }
-
-
-
-
-
-
-

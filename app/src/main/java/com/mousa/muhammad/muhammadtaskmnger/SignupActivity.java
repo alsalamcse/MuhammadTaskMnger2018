@@ -12,6 +12,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 public class SignupActivity extends AppCompatActivity {
     //1.add auth to project
@@ -20,7 +21,7 @@ public class SignupActivity extends AppCompatActivity {
     private Button btnSave;
    //3.
     FirebaseAuth auth;//to establish sign in sign up
-    FirebaseAuth user;//user
+    FirebaseUser user;//user
 
 
 
@@ -34,7 +35,7 @@ public class SignupActivity extends AppCompatActivity {
         
 
         auth = FirebaseAuth.getInstance();
-       // user = auth.getCurrentUser();//تعيد الكائن باليوزر الحالي اذا عامل sign in
+        user = auth.getCurrentUser();//تعيد الكائن باليوزر الحالي اذا عامل sign in
 
         etEmail2=(EditText) findViewById(R.id.etEmail2);
         etPassword2=(EditText) findViewById(R.id.etPassword2);
