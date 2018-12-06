@@ -1,4 +1,4 @@
-package com.mousa.muhammad.muhammadtaskmnger;
+package com.mousa.muhammad.muhammadtaskmnger.data;
 
 import java.util.Date;
 

@@ -16,8 +16,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.mousa.muhammad.muhammadtaskmnger.R;
-import com.mousa.muhammad.muhammadtaskmnger.taskfragment.dummy.DummyContent;
-import com.mousa.muhammad.muhammadtaskmnger.taskfragment.dummy.DummyContent.DummyItem;
+import com.mousa.muhammad.muhammadtaskmnger.data.MyTask;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -62,19 +61,26 @@ public class MyTasksFragment extends Fragment {
             } else {
                 recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
             }
-            recyclerView.setAdapter(new MyItemRecyclerViewAdapter(DummyContent.ITEMS, mListener));
+            recyclerView.setAdapter(new MyItemRecyclerViewAdapter(readTasks(), mListener));
         }
         return view;
     }
 
     private List<MyTask> readTasks()
     {
-        ArrayList<MyTask> myTasks=null;
+        final ArrayList<MyTask> myTasks=null;
         //
         DatabaseReference reference= FirebaseDatabase.getInstance().getReference();
         reference.child("MyTasks").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
+                for (DataSnapshot d:dataSnapshot.getChildren())
+                {
+                    MyTask task=d.getValue(MyTask.class);
+                    myTasks.add(task);
+
+                }
+
 
 
             }
@@ -118,6 +124,6 @@ public class MyTasksFragment extends Fragment {
      */
     public interface OnListFragmentInteractionListener {
         // TODO: Update argument type and name
-        void onListFragmentInteraction(DummyItem item);
+        void onListFragmentInteraction(MyTask item);
     }
 }
