@@ -7,7 +7,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.mousa.muhammad.muhammadtaskmnger.R;
-import com.mousa.muhammad.muhammadtaskmnger.data.MyTask;
+import com.mousa.muhammad.muhammadtaskmnger.taskfragment.data.MyTask;
 import com.mousa.muhammad.muhammadtaskmnger.taskfragment.MyTasksFragment.OnListFragmentInteractionListener;
 import com.mousa.muhammad.muhammadtaskmnger.taskfragment.dummy.DummyContent.DummyItem;
 
